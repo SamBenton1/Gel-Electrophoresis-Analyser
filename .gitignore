@@ -1,5 +1,6 @@
 venv
 resources
 .idea
+.ipynb_checkpoints
 
 *.pickle

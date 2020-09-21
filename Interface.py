@@ -173,6 +173,6 @@ def OpenUI(sample_path):
 
 
 if __name__ == '__main__':
-    results = OpenUI(r"Gels\Gel 2(4) (1).jpg")
+    results = OpenUI(r"Gels\Gel 1(4).jpg")
     with open("results.pickle", "wb") as data_file:
         pickle.dump(results, data_file)
