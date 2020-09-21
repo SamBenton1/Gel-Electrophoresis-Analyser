@@ -27,7 +27,6 @@ Peaks in the data are found using the SciPy scipy.signal.find_peaks() method. Th
 the band detection.
 
 ```
-# Peak finding variables
 BRIGHTNESS_THRESHOLD = 80
 PEAK_WIDTH = 2
 PEAK_SEPARATION = 4

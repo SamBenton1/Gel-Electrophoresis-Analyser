@@ -1,6 +1,5 @@
 venv
 resources
-Gels
 .idea
 
 *.pickle

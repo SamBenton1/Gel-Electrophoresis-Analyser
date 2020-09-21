@@ -12,6 +12,7 @@ and the bands.
 """
 
 import pickle
+import logging
 import pygame
 from PIL import Image
 import numpy as np
@@ -31,6 +32,8 @@ PEAK_WIDTH = 2
 PEAK_SEPARATION = 4
 OFFSET = 1
 INTERVALS = 7
+
+# logging.basicConfig(level=logging.INFO)
 
 
 def _GraphBandDetection(pixel_array, peaks):
@@ -67,6 +70,7 @@ def OpenUI(sample_path):
     win = pygame.display.set_mode((width, height))
     pygame.display.set_caption("PCR Analyser")
     pygame.display.set_icon(pygame.image.load("resources/icon.jpg"))
+    logging.info("Interface window started")
 
     pygame.font.init()
     font = pygame.font.SysFont("arial", 20)
@@ -106,6 +110,7 @@ def OpenUI(sample_path):
 
         # Graph the bands as they are selected
         if GRAPH:
+            logging.info("Pixel array graphing is on")
             _GraphBandDetection(pixel_array, peaks)
 
         peak_points = [(mouse_x, peak) for peak in peaks[0]]
@@ -152,11 +157,15 @@ def OpenUI(sample_path):
                 # To close the window and perform calculation
                 elif event.key == pygame.K_RETURN:
                     pygame.quit()
-                    return {
+                    data = {
                         "well_position": well_position,
                         "markers": marker_coordinates,
                         "bands": band_coordinates
                     }
+                    if not all(data.values()):
+                        logging.warning("One or more of the data were not selected in the interface")
+
+                    return data
 
         RedrawGameWindow()
         pygame.display.flip()
